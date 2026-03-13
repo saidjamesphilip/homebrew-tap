@@ -1,6 +1,6 @@
 cask "niwa" do
-  version "1.3.10"
-  sha256 "1a0ab746ef27f39284225663fd0d52d4c72f437d5bd69d39023b6cef81e22f93"
+  version "1.3.11"
+  sha256 "e0d1c128984ec10aa760ebddc7b2827e9fad86d223d0642a7610679f2d4427f6"
 
   url "https://github.com/saidjamesphilip/Niwa/releases/download/v#{version}/Niwa-#{version}-mac.zip"
   name "Niwa"
@@ -10,6 +10,11 @@ cask "niwa" do
   depends_on macos: ">= :sequoia"
 
   app "Niwa.app"
+
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-cr", "#{appdir}/Niwa.app"]
+  end
 
   zap trash: [
     "~/Library/Application Support/com.niwa.app",
